@@ -33,6 +33,7 @@ if (!$status && $errno != 404) {
   $trx_date  = $data['tgl_transaksi'];
   $inv_date  = $data['tgl_invoice'];
   $inv_no    = $data['no_transaksi'];
+  $no_izin_bi = $data['no_izin_bi'];
   $type      = $data['type'];
   $customer  = strlen($data['pelanggan']) <= 15 ? $data['pelanggan'] : substr($data['pelanggan'],0,15);
   $customer2 = strlen($data['pelanggan']) > 15 ? substr($data['pelanggan'], 15, 15) : "";
@@ -72,6 +73,8 @@ if (!$status && $errno != 404) {
   $printer->text("Danau Sunter Utara F20 No. 24 Jakut\n");
   $printer->text("02129615678 - 087774568833 \n");
   $printer->text("www.savemoneychanger.com \n");
+  $printer->text("No. Izin BI: $no_izin_bi \n");
+
   $printer->text("$line1\n");
   $printer->feed();
 
