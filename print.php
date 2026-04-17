@@ -46,6 +46,7 @@ if (!$status && $errno != 404) {
   $payment   = $data['payment'];
   $servedby  = $data['served_by'];
   $totalp    = $data['total'];
+  $moneyBack = $data['money_back'];
 
   $label_total = $type == 'INVOICE PEMBELIAN' ? 'Total Pembelian' : 'Total Penjualan';
 
@@ -117,6 +118,7 @@ if (!$status && $errno != 404) {
   $printer->text("\n");
   $printer -> setEmphasis(true);
   $printer->text(sprintf('%-15.15s %2s %13s', formatText('Total Pembelian','center', 15), 'Rp', formatText(number_format($totalp),'center',13)));
+  $printer->text(sprintf('%-15.15s %2s %13s', formatText('Kembalian','center', 15), 'Rp', formatText(number_format($moneyBack),'center',13)));
   $printer -> setEmphasis(false);
   $printer->text("\n");
   $printer->text("$line3");
@@ -133,7 +135,7 @@ if (!$status && $errno != 404) {
   $printer->setJustification(Printer::JUSTIFY_LEFT);
   $printer -> selectPrintMode(Printer::MODE_FONT_B);
   $printer->text("Saya menyatakan bahwa seluruh dokumen\n");
-  $printer->text("yang saya lampirkan adalah benar dan sah.\n");
+  $printer->text("yang saya lampirkan adalah benar dan sah\n");
   $printer->text("Apabila di kemudian hari ditemukan\n");
   $printer->text("ketidakbenaran pada dokumen tersebut,\n");
   $printer->text("maka hal tersebut sepenuhnya menjadi\n");
