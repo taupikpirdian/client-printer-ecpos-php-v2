@@ -118,7 +118,6 @@ if (!$status && $errno != 404) {
   $printer->text("\n");
   $printer -> setEmphasis(true);
   $printer->text(sprintf('%-15.15s %2s %13s', formatText('Total Pembelian','center', 15), 'Rp', formatText(number_format($totalp),'center',13)));
-  $printer->text(sprintf('%-15.15s %2s %13s', formatText('Kembalian','center', 15), 'Rp', formatText(number_format($moneyBack),'center',13)));
   $printer -> setEmphasis(false);
   $printer->text("\n");
   $printer->text("$line3");
@@ -130,7 +129,15 @@ if (!$status && $errno != 404) {
     $printer->text($p['bank'] ."\n");
     $printer->text(number_format($p['jumlah']) ."\n");
   }
-  
+
+  if($moneyBack > 0){
+    $printer->text("\n");
+    $printer->setEmphasis(true);
+    $printer->text(sprintf('%-15.15s %2s %13s', formatText('Kembalian','left', 15), 'Rp', formatText(number_format($moneyBack),'right',13)));
+    $printer->setEmphasis(false);
+    $printer->text("\n");
+  }
+
   $printer->text("\n");
   $printer->setJustification(Printer::JUSTIFY_LEFT);
   $printer -> selectPrintMode(Printer::MODE_FONT_B);
