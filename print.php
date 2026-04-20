@@ -124,16 +124,19 @@ if (!$status && $errno != 404) {
   $printer->text("\n\n");
   $printer->text("Dealer Name : $notes\n");
 
+  $printer->text("Payment:\n");
   foreach ($payment_info as $p) {
-    $printer->text("Payment : $p[payment] ");
-    $printer->text($p['bank'] ."\n");
-    $printer->text(number_format($p['jumlah']) ."\n");
+    $payLabel = ucfirst($p['payment']);
+    if ($p['payment'] == 'transfer' && !empty($p['bank'])) {
+      $payLabel = $p['bank'];
+    }
+    $printer->text(sprintf('%-15.15s %1s %14s', $payLabel, ":", formatText("Rp. " . number_format($p['jumlah']), 'right', 14) . "\n"));
   }
 
   if($moneyBack > 0){
     $printer->text("\n");
     $printer->setEmphasis(true);
-    $printer->text(sprintf('%-15.15s %2s %13s', formatText('Kembalian','left', 15), 'Rp', formatText(number_format($moneyBack),'right',13)));
+    $printer->text(sprintf('%-15.15s %2s %13s', formatText('Kembali','left', 15), 'Rp', formatText(number_format($moneyBack),'right',13)));
     $printer->setEmphasis(false);
     $printer->text("\n");
   }
